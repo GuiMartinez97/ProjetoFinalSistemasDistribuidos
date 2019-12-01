@@ -29,6 +29,8 @@ namespace Client
 
             int lastIndex = 0;
 
+            var totalRegisterComputed = 0; 
+
             for (int i = 0; i < threadsQtd; i++)
             {
                 List<string> listToBeSend = lines.GetRange(lastIndex, __portion__);
@@ -39,12 +41,15 @@ namespace Client
                 
                 for (int j = 0; j < result.Length; j++)
                 {
+                    totalRegisterComputed++;
                     __tsw__.WriteLine(result[j]);
+                    Console.WriteLine($"Resultado {result[j]} - {totalRegisterComputed}");
                 }
-                
             }
 
             watch.Stop();
+            Console.WriteLine($"Tempo total: {watch.Elapsed}");
+            Console.ReadLine(); 
         }
 
         private static string[] SendRequest(List<string> _registersToBeSended)
